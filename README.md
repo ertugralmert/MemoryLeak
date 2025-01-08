@@ -36,3 +36,71 @@ Result
 English
 An OutOfMemoryError occurs when your JVM's Heap Size limit is reached.
 If the -XX:+HeapDumpOnOutOfMemoryError JVM parameter is set, a Heap Dump file is created.
+
+---
+
+## Check Heap Dump
+#### GUI 
+
+
+### GUI (WebSphere Admin Console) Üzerinden:
+
+1. **Admin Console'a Giriş Yapın**:
+	- `http://<host>:<port>/ibm/console` adresinden giriş yapın.
+2. **JVM Ayarlarına Gidin**:
+	- **Servers** > **Server Types** > **WebSphere Application Servers** > [Sunucunuzun adı] > **Java and Process Management** > **Process Definition** > **Java Virtual Machine**.
+3. **Heap Ayarlarını Değiştirin**:
+	- **Initial Heap Size** (Xms): Minimum belleği ayarlar (örnek: `16` MB).
+	- **Maximum Heap Size** (Xmx): Maksimum belleği ayarlar (örnek: `32` MB).
+4. **Kaydedip Restart Edin**:
+	- Değişiklikleri kaydedin ve sunucuyu yeniden başlatın.
+
+
+----
+
+### CLI (Komut Satırı) Üzerinden:
+
+1. **JVM Argümanları Ayarları**: Sunucuyu başlatırken JVM argümanlarını değiştirin:
+
+	`./server start <serverName> -Xms16m -Xmx32m`
+
+
+	- **Xms**: Başlangıçta tahsis edilen bellek (örnek: `16m`).
+	- **Xmx**: Maksimum tahsis edilecek bellek (örnek: `32m`).
+2. **Profil Konfigürasyonu (server.xml)**: `server.xml` dosyasında JVM ayarlarını ekleyin:
+
+` -Xms16m -Xmx32m
+
+`
+----
+
+## 3. **Heap Dump Alma**
+
+
+Heap Dump, uygulama `OutOfMemoryError` aldığında veya manuel olarak tetiklenerek alınabilir.
+
+### a. **OutOfMemoryError Durumunda Dump Alma**
+
+
+`-XX:+HeapDumpOnOutOfMemoryError` JVM argümanını ekleyerek, `OutOfMemoryError` alındığında dump otomatik olarak oluşturulur:
+
+`./server start <serverName> -Xms16m -Xmx32m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/path/to/dump`
+
+
+- **HeapDumpPath**: Dump dosyasının kaydedileceği yolu belirtir.
+
+
+----
+
+### b. **Manuel Olarak Dump Alma**
+
+1. **JConsole veya jcmd**:
+	- `jconsole` veya `jcmd` ile bağlı sunucu için heap dump alınabilir:
+
+	`jcmd <pid> GC.heap_dump /path/to/dumpfile.hprof`
+
+
+	- **`<pid>`**: JVM işleminin PID'si.
+2. **Admin Console Üzerinden**:
+	- **Monitoring and Tuning** > **Performance Viewer** > **Dump Heap**.
+
