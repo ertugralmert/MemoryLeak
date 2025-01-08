@@ -1,19 +1,13 @@
 # Servlet Çağrısı
 
-## Türkçe
-
 - **HTTP GET isteği**: `http://<host>:<port>/MemoryLeakApp/memoryleak` adresine bir HTTP GET isteği gönderildiğinde, servlet çalışır.
 
 # Bellek Tüketimi
-
-## Türkçe
 
 - **doGet metodu**: Servlet'in `doGet` metodu çağrıldığında, her döngüde `memoryLeak` listesine 10 MB büyüklüğünde bir `byte[]` eklenir.
 - **Döngü**: Döngü 1000 kez çalıştığı için toplamda yaklaşık 10 GB bellek tüketimi yapılmaya çalışılır.
 
 # Yanıt (Response)
-
-## Türkçe
 
 - Servlet başlığına `resp.setHeader("Java-Developer", "mertugral");` ile özel bir bilgi eklenir.
 - Yanıt olarak `resp.getWriter().write()` ile mevcut listenin büyüklüğü döndürülür:
