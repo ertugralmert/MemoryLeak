@@ -14,6 +14,7 @@
 
 ```text
 Memory leak test ongoing... Current size: 1000 MB
+```
 
 > JVM'inizin Heap Size sınırına ulaştığında OutOfMemoryError oluşur.
 Eğer -XX:+HeapDumpOnOutOfMemoryError JVM parametresi tanımlıysa, bir Heap Dump dosyası oluşturulur.
