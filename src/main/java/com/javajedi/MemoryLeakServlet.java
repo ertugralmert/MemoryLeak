@@ -12,20 +12,20 @@ import java.util.List;
  * MemoryLeakServlet - A simple servlet to simulate memory leak for testing purposes.
  * Created by mertugral
  */
-@WebServlet("/memoryleak")
+
 public class MemoryLeakServlet extends HttpServlet {
     private static final List<byte[]> memoryLeak = new ArrayList<>();
+    private static final int MB = 1024 * 1024;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-    {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/plain");
         resp.setHeader("Java-Developer", "mertugral");
-        for (int i = 0; i < 1000; i++)
-        {
-            memoryLeak.add(new byte[1024*10024]); // döngüde 1MB ekliyorum
+
+        for (int i = 0; i < 1000; i++) {
+            memoryLeak.add(new byte[MB]);
         }
-        resp.getWriter().write("Memory leak test ongoing... Current size: " + memoryLeak.size() + " MB");
+
+        resp.getWriter().write("Memory leak test... Size: " + memoryLeak.size() + " MB");
     }
-
-
 }
