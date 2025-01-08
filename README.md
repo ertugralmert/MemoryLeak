@@ -18,7 +18,7 @@ long free = rt.freeMemory();        // Boş bellek
 long used = total - free;           // Kullanılan bellek
 ```
 ---
-### WebSpehere Uygulama Yükleme
+### WebSphere Uygulama Yükleme
 * Öncelikle yükleceğiniz uygulama paketi "war" olması daha iyi olur.
 * Java 1.8 kullanmanız faydalı olacaktır.
 * Servlet anotasyonu olarak @WebServlet yerine web.xml kullanmanızı tavsiye ederim.
